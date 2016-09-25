@@ -1,0 +1,46 @@
+<h1 class="page-header">{{title}}</h1>
+<h2 ng-show="message">{{message}}</h2>
+<div class="list-group">
+  <a href="#/detail/{{item.id}}" class="list-group-item " ng-repeat="item in subject.subjects">
+   <span class="badge">{{item.rating.average}}</span>
+    <div class="media">
+      <div class="media-left">
+          <img class="media-object" ng-src={{item.images.medium}} alt="{{item.title}}">
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading">{{item.title}}</h3>
+
+        <p>类型：{{item.genres.join('、')}}</span>&emsp;&emsp;上映年份：{{item.year}}</p>
+        <!-- <p>类型：<span ng-repeat="catogory in item.genres">{{}}</span></p> -->
+        <p>导演：<span ng-repeat="dy in item.directors">{{dy.name + ($last ? '':'、')}}</span></p>
+        <!-- <p>导演：<span ng-repeat="dy in item.directors">{{dy.name + $last ? '':'、'}}</span></p>未加括号报错 -->
+        <p>主演：<span ng-repeat="ca in item.casts">{{ca.name + ($last ? '':'、')}}</span></p>
+      </div>
+    </div>
+  </a>
+</div>
+<div class="zh" ng-show="loaded">
+	<p >总共：{{subject.total}}条记录，&emsp;第{{page+'/'+totalPage}}页</p>
+	<nav>
+	  <ul class="pager">
+	  <!-- 不用ng-click事件函数 -->
+<!-- 	    <li ng-class='{disabled:page<=1}''><a href="#/in_theaters/{{page<=1 ? 1: page-1}}">&larr;上一页</a></li>
+	    <li ng-class='{disabled:page>=totalPage}''><a href="#/in_theaters/{{page<totalPage ? page+1: totalPage}}">下一页&rarr;</a></li> -->
+	    <!-- 使用ng-ckick事件函数 -->
+	    <li ng-class='{disabled:page<=1}'><a  ng-click="go(page-1)">&larr;上一页</a></li>
+	    <li ng-class='{disabled:page>=totalPage}'><a ng-click="go(page+1)">下一页&rarr;</a></li>
+	  </ul>
+	</nav>
+</div>
+<div class="loadmask" ng-show="!loaded">
+	<div class="loadEffect" >  
+        <span></span>  
+        <span></span>  
+        <span></span>  
+        <span></span>  
+        <span></span>  
+        <span></span>  
+        <span></span>  
+        <span></span>  
+	</div>  
+</div>
